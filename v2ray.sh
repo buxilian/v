@@ -23,7 +23,19 @@ https://www.wenshulou.cc/
 http://www.55shuba.com/
 http://www.39shubao.com/
 https://www.23xsw.cc/
-https://www.huanbige.com/
+#https://www.huanbige.com/
+https://www.jueshitangmen.info/
+https://www.zhetian.org/
+http://www.bequgexs.com/
+http://www.tjwl.com/
+http://www.zhuizishu.com/
+http://xs.56dyc.com/
+http://www.ddxsku.com/
+http://www.biqu6.com/
+https://www.wenshulou.cc/
+http://www.55shuba.com/
+http://www.39shubao.com/
+https://www.23xsw.cc/
 https://www.jueshitangmen.info/
 https://www.zhetian.org/
 http://www.bequgexs.com/
@@ -38,7 +50,7 @@ V6_PROXY=""
 IP=`curl -sL -4 ip.sb`
 if [[ "$?" != "0" ]]; then
     IP=`curl -sL -6 ip.sb`
-    V6_PROXY="https://gh.hijk.art/"
+    V6_PROXY="http://ipget.net/"
 fi
 
 BT="false"
@@ -272,8 +284,10 @@ getData() {
             CERT_FILE="/etc/v2ray/${DOMAIN}.pem"
             KEY_FILE="/etc/v2ray/${DOMAIN}.key"
         else
-            resolve=`curl -sL https://hijk.art/hostip.php?d=${DOMAIN}`
-            res=`echo -n ${resolve} | grep ${IP}`
+            ##resolve=`curl -sL https://hijk.art/hostip.php?d=${DOMAIN}`
+            ##res=`echo -n ${resolve} | grep ${IP}`
+	    resolve=`curl -sm8 ipget.net/?ip=${DOMAIN}`
+	    res=`echo -n ${resolve} | grep ${IP}`
             if [[ -z "${res}" ]]; then
                 colorEcho ${BLUE}  "${DOMAIN} 解析结果：${resolve}"
                 colorEcho ${RED}  " 域名未解析到当前服务器IP(${IP})!"
@@ -415,8 +429,10 @@ getData() {
                     index=`shuf -i0-${len} -n1`
                     PROXY_URL=${SITES[$index]}
                     host=`echo ${PROXY_URL} | cut -d/ -f3`
-                    ip=`curl -sL https://hijk.art/hostip.php?d=${host}`
-                    res=`echo -n ${ip} | grep ${host}`
+                    ##ip=`curl -sL https://hijk.art/hostip.php?d=${host}`
+                    ##res=`echo -n ${ip} | grep ${host}`
+		    ip=`curl -sm8 ipget.net/?ip=${host}`
+	            res=`echo -n ${ip} | grep ${host}`
                     if [[ "${res}" = "" ]]; then
                         echo "$ip $host" >> /etc/hosts
                         break
